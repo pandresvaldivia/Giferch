@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import { useFetchGifs } from '../hooks/useFetchGifs';
 import ErrorAlert from './ErrorAlert';
-import GiftCard from './GiftCard';
+import GifCard from './GifCard';
 import Spinner from './Spinner';
 
 const GifGrid = ({ category, amount }) => {
@@ -16,7 +16,7 @@ const GifGrid = ({ category, amount }) => {
 			) : (
 				<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gif-grid-rows w-full gap-4">
 					{giftList.map(({ id, title, image, url }) => (
-						<GiftCard key={id} title={title} image={image} url={url} />
+						<GifCard key={id} title={title} image={image} url={url} />
 					))}
 				</div>
 			)}

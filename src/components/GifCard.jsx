@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 
-const GiftCard = ({ title, image, url }) => {
+const GifCard = ({ title, image, url }) => {
 	return (
 		<article className="gif-card rounded-lg overflow-hidden relative">
 			<figure className="w-full h-full relative">
@@ -21,10 +21,10 @@ const GiftCard = ({ title, image, url }) => {
 	);
 };
 
-GiftCard.propTypes = {
+GifCard.propTypes = {
 	title: PropTypes.string.isRequired,
 	image: PropTypes.string.isRequired,
 	url: PropTypes.string.isRequired,
 };
 
-export default GiftCard;
+export default GifCard;
