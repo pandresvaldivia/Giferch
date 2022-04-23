@@ -1,16 +1,33 @@
 import PropTypes from 'prop-types';
 import { useState } from 'react';
+import ErrorAlert from './ErrorAlert';
 
 const SearchCategory = ({ category, setCategory }) => {
 	const [inputValue, setInputValue] = useState('');
+	const [error, setError] = useState('');
 
 	const handleInputChange = (e) => {
 		setInputValue(e.target.value);
 	};
 
+	const validateForm = () => {
+		if (!inputValue.trim()) {
+			setError('Please enter a category');
+
+			setTimeout(() => {
+				setError('');
+			}, 1000);
+		}
+
+		return inputValue.trim();
+	};
+
 	const handleSubmit = (e) => {
 		e.preventDefault();
-		setCategory(inputValue);
+
+		if (!validateForm()) return;
+
+		setCategory(inputValue.trim());
 		setInputValue('');
 	};
 
@@ -22,6 +39,7 @@ const SearchCategory = ({ category, setCategory }) => {
 			<h2 className="uppercase text-2xl font-bold">
 				Results of <span className="text-cyan-400">{category}</span>:
 			</h2>
+			{error && <ErrorAlert message={error} />}
 			<form className="flex w-full md:w-auto" onSubmit={handleSubmit}>
 				<input
 					className="outline-none border-2 bg-neutral-900 border-neutral-700 border-r-0 focus:bg-neutral-700 p-1.5 rounded-tl-md rounded-bl-md flex-1"

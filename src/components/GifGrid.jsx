@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 import { useFetchGifs } from '../hooks/useFetchGifs';
+import ErrorAlert from './ErrorAlert';
 import GiftCard from './GiftCard';
 import Spinner from './Spinner';
 
@@ -10,6 +11,8 @@ const GifGrid = ({ category, amount }) => {
 		<section aria-label="Search results">
 			{loading ? (
 				<Spinner />
+			) : giftList.length === 0 ? (
+				<ErrorAlert message="There are no results" />
 			) : (
 				<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gif-grid-rows w-full gap-4">
 					{giftList.map(({ id, title, image, url }) => (
