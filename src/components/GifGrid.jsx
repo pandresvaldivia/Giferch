@@ -1,44 +1,28 @@
 import PropTypes from 'prop-types';
-
-import { useEffect, useState } from 'react';
+import { useFetchGifs } from '../hooks/useFetchGifs';
 import GiftCard from './GiftCard';
+import Spinner from './Spinner';
 
-const GifGrid = ({ amount }) => {
-	const [giftList, setGiftList] = useState([]);
-
-	useEffect(() => {
-		getGifs('dogs');
-	});
-
-	const getGifs = async (category) => {
-		const url = `https://api.giphy.com/v1/gifs/search?api_key=2s9S93EcZl97rGL4Zms21E7qCRusVxGf&q=${category}&limit=${amount}&offset=0&rating=g&lang=en`;
-
-		const resp = await fetch(url);
-		const { data } = await resp.json();
-
-		const gifList = data.map(({ id, title, images, url }) => ({
-			id,
-			title,
-			image: images.downsized_medium.url,
-			url,
-		}));
-
-		setGiftList(gifList);
-	};
+const GifGrid = ({ category, amount }) => {
+	const { data: giftList, loading } = useFetchGifs(category, amount);
 
 	return (
-		<section
-			className="grid grid-cols-2 md:grid-cols-4"
-			aria-label="Search results"
-		>
-			{giftList.map(({ id, title, image, url }) => (
-				<GiftCard key={id} title={title} image={image} url={url} />
-			))}
+		<section aria-label="Search results">
+			{loading ? (
+				<Spinner />
+			) : (
+				<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gif-grid-rows w-full gap-4">
+					{giftList.map(({ id, title, image, url }) => (
+						<GiftCard key={id} title={title} image={image} url={url} />
+					))}
+				</div>
+			)}
 		</section>
 	);
 };
 
 GifGrid.propTypes = {
+	category: PropTypes.string.isRequired,
 	amount: PropTypes.number,
 };
 
