@@ -16,7 +16,9 @@ const GifCard = ({ title, image, url }) => {
 				className="absolute inset-0"
 				target="_blank"
 				rel="noopener noreferrer"
-			/>
+			>
+				{' '}
+			</a>
 		</article>
 	);
 };

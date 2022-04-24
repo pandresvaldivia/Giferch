@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 import { useState } from 'react';
+import { validateForm } from '../helpers/validateForm';
 import ErrorAlert from './ErrorAlert';
 
 const SearchCategory = ({ category, setCategory }) => {
@@ -10,22 +11,10 @@ const SearchCategory = ({ category, setCategory }) => {
 		setInputValue(e.target.value);
 	};
 
-	const validateForm = () => {
-		if (!inputValue.trim()) {
-			setError('Please enter a category');
-
-			setTimeout(() => {
-				setError('');
-			}, 1000);
-		}
-
-		return inputValue.trim();
-	};
-
 	const handleSubmit = (e) => {
 		e.preventDefault();
 
-		if (!validateForm()) return;
+		if (!validateForm(inputValue, setError)) return;
 
 		setCategory(inputValue.trim());
 		setInputValue('');
