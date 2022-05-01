@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`These are the tests for the GifExpertApp component Should return the initial state of the GifExpertApp component 1`] = `
+<Fragment>
+  <Header />
+  <main
+    className="px-8 py-6 max-w-screen-xl mx-auto"
+  >
+    <SearchCategory
+      category="Rick and Morty"
+      setCategory={[Function]}
+    />
+    <GifGrid
+      amount={16}
+      category="Rick and Morty"
+    />
+  </main>
+</Fragment>
+`;
